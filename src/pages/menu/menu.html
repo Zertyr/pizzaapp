@@ -1,0 +1,64 @@
+
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>menus</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="menu">
+          <ion-segment-button value="etudiant">
+            Etudiant
+          </ion-segment-button>
+          <ion-segment-button value="bestof">
+            Best of
+          </ion-segment-button>
+          <ion-segment-button value="maxibestof">
+              Maxi Best of
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <div [ngSwitch]="menu">
+        <!-- <ion-list *ngSwitchCase="'Pizza'">
+            <ion-item *ngFor="let item of products | filterByCategorie:{categorie.name: products[0], include: true}]">
+                {{item.name}}
+            </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item *ngFor="let item of products | filterByCategorie:{categorie.name: products[0], include: false}]" icon-left>
+            {{p.name}}
+        </ion-item>
+      </ion-list> -->
+       <ion-list *ngSwitchCase="'etudiant'">
+          <h2>Menus Etudiant :</h2>
+          <span *ngFor="let p of products">
+              <ion-item  *ngIf="p.menu.name == 'Menu etudiant'">
+                  <p>{{p.name}}</p>
+                </ion-item>
+          </span>
+        </ion-list>
+        <ion-list *ngSwitchCase="'bestof'">
+            <h2>Menus Best of :</h2>
+            <span *ngFor="let p of products">
+                <ion-item  *ngIf="p.menu.name == 'Menu Bestof'">
+                    <p>{{p.name}}</p>
+                  </ion-item>
+            </span>
+        </ion-list>
+        <ion-list *ngSwitchCase="'maxibestof'">
+            <h2>Menus Maxi Best of :</h2>
+            <span *ngFor="let p of products">
+                <ion-item  *ngIf="p.menu.name == 'Menu Maxi BestOf'">
+                    <p>{{p.name}}</p>
+                  </ion-item>
+            </span>
+  
+        </ion-list>
+    </div>
+  </ion-content>
+  

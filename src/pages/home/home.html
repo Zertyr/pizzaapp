@@ -1,14 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
+
+  80 Avenue Roland Moreno
+  <br>
+  06 58 59 57 56
   <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <button ion-button icon-only (click)="show()">
+      <ion-icon name="prompt">test</ion-icon>
+    </button>
+    <button ion-button icon-only (click)="goToProducts()">
+      <ion-icon name="Product">Product</ion-icon>
+    </button>
+
+    <ion-input placeholder="login"></ion-input>
+    <ion-input placeholder="password"></ion-input>
+    <button ion-button icon-only (click)="goToProducts()">
+        <ion-icon name="Connect">Connect</ion-icon>
+      </button>
 </ion-content>
