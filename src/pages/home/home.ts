@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
 
 import { ProductPage } from '../product/product';
 import { BackendProvider } from '../../providers/backend/backend';
+import { BasketPage } from '../../pages/basket/basket';
 
 @Component({
   selector: 'page-home',
@@ -10,7 +11,7 @@ import { BackendProvider } from '../../providers/backend/backend';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public backendProvider: BackendProvider) {  }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public backendProvider: BackendProvider,  public modalCtrl: ModalController) {  }
 
 
 
@@ -50,6 +51,10 @@ export class HomePage {
   });
   prompt.present();
 }
+openBasicModal() {
+  let myModal = this.modalCtrl.create(BasketPage);
+  myModal.present();
+}
 
 goToProducts(){
   console.log("test")
@@ -60,4 +65,5 @@ goToProducts(){
 
   })
 }
+
 }

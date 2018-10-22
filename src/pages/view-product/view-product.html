@@ -1,0 +1,40 @@
+<!--
+  Generated template for the ViewProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="twitter">
+      <ion-buttons end>
+          <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Product Page</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <h1 text-center>{{product.name}}</h1>
+    <img src="{{product.image}}" alt="" >
+    <p>{{product.price}} €</p>
+    <hr>
+    <p>
+        {{product.categorie.name}}
+    </p>
+    <hr>
+    <p>
+        {{product.menu.name}}
+    </p>
+    <hr>
+    
+      <h3>Ingredients :</h3>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      Sed id arcu metus. Aliquam eu libero nisi. Sed eu porttitor libero, sit amet suscipit elit. 
+      Quisque faucibus augue ut malesuada cursus. Mauris quis tellus nunc. Nullam accumsan nisl nunc. 
+      Nulla augue metus, rhoncus eget dolor sed, elementum volutpat felis. 
+      Donec ut ultricies mi, sit amet maximus velit.
+    
+</ion-content>

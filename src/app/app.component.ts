@@ -6,10 +6,13 @@ import { NavController, AlertController } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
 import { ProductPage } from '../pages/product/product';
-import { AddPizzaPage } from '../pages/add-pizza/add-pizza';
 import { CategoryPage } from '../pages/category/category';
 import { MenuPage } from '../pages/menu/menu';
+import { LoginPage } from '../pages/login/login';
+import { ViewProductPage } from '../pages/view-product/view-product';
+
 import { NgIf } from '@angular/common';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -22,10 +25,10 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', component: HomePage },
+      { title: 'Login', component: LoginPage },
       { title: 'Product', component: ProductPage },
       { title: 'Category', component: CategoryPage },
-      { title: 'Menu', component: MenuPage },
-      { title: 'add Product', component: AddPizzaPage }
+      { title: 'Menu', component: MenuPage }
     ];
     
     platform.ready().then(() => {
@@ -35,6 +38,7 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

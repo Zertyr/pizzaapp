@@ -1,28 +1,44 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar  color="twitter">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <img src="assets/imgs/pizza.png" class="logo" alt="">
+    <ion-title>PizzaApp</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="openBasicModal()">
+          <ion-icon name="basket"></ion-icon>
+          <ion-badge id="cart-badge" class="{{this.backendProvider.showBadge? 'visibleBadge' : 'hiddenBadge' }}">{{this.backendProvider.quantity}}</ion-badge>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <div class="wrapper">
+    <div class="container" >
+      <div text-center>
+      <h5>Notre adresse :</h5>
+      <p >
+        80 Avenue Roland Moreno
+        <br>
+        06 58 59 57 56
+      </p>
+      <ion-img src="assets/imgs/todaypizza.jpg"></ion-img>
+      <p>
+        Venez on est bien !
+      </p>
+      <br>
+    </div>
+      <!-- <div class="test">
+        <button ion-button icon-only (click)="show()">
+          <ion-icon name="prompt">test</ion-icon>
+        </button>
+        <button ion-button icon-only (click)="goToProducts()">
+          <ion-icon name="Product">Product</ion-icon>
+        </button>
+      </div> -->
+    </div>
+  </div>
 
-  80 Avenue Roland Moreno
-  <br>
-  06 58 59 57 56
-  <p>
-    <button ion-button icon-only (click)="show()">
-      <ion-icon name="prompt">test</ion-icon>
-    </button>
-    <button ion-button icon-only (click)="goToProducts()">
-      <ion-icon name="Product">Product</ion-icon>
-    </button>
-
-    <ion-input placeholder="login"></ion-input>
-    <ion-input placeholder="password"></ion-input>
-    <button ion-button icon-only (click)="goToProducts()">
-        <ion-icon name="Connect">Connect</ion-icon>
-      </button>
 </ion-content>

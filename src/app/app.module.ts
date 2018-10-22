@@ -8,20 +8,26 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProductPage } from '../pages/product/product';
 import { CategoryPage } from '../pages/category/category';
-import { AddPizzaPage } from '../pages/add-pizza/add-pizza';
 import { MenuPage } from '../pages/menu/menu';
+import { LoginPage } from '../pages/login/login';
 import { PipesModule } from '../pipes/pipes.module';
 import { BackendProvider } from '../providers/backend/backend';
 import { HttpModule } from '@angular/http';
+import { BasketPage } from '../pages/basket/basket';
+import { ViewProductPage } from '../pages/view-product/view-product';
+import { QuantityPage } from '../pages/quantity/quantity';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ProductPage,
-    AddPizzaPage,
     CategoryPage,
-    MenuPage
+    MenuPage,
+    LoginPage,
+    BasketPage,
+    ViewProductPage,
+    QuantityPage
   ],
   imports: [
     BrowserModule,
@@ -34,9 +40,12 @@ import { HttpModule } from '@angular/http';
     MyApp,
     HomePage,
     ProductPage,
-    AddPizzaPage,
     CategoryPage,
-    MenuPage
+    MenuPage,
+    LoginPage,
+    BasketPage,
+    ViewProductPage,
+    QuantityPage
   ],
   providers: [
     StatusBar,

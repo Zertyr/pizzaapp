@@ -1,10 +1,17 @@
 
 <ion-header>
-    <ion-navbar>
+    <ion-navbar  color="twitter">
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
+      <img src="assets/imgs/pizza.png" class="logo" alt="">
       <ion-title>menus</ion-title>
+      <ion-buttons end>
+            <button ion-button icon-only (click)="openBasicModal()">
+              <ion-icon name="basket"></ion-icon>
+              <ion-badge id="cart-badge" class="{{this.backendProvider.showBadge? 'visibleBadge' : 'hiddenBadge' }}">{{this.backendProvider.quantity}}</ion-badge>
+            </button>
+          </ion-buttons>
     </ion-navbar>
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="menu">
@@ -36,25 +43,31 @@
       </ion-list> -->
        <ion-list *ngSwitchCase="'etudiant'">
           <h2>Menus Etudiant :</h2>
+          <p>6€ Pizza + Boisson + dessert</p>
           <span *ngFor="let p of products">
               <ion-item  *ngIf="p.menu.name == 'Menu etudiant'">
                   <p>{{p.name}}</p>
+                  <p>{{p.price}} €</p>
                 </ion-item>
           </span>
         </ion-list>
         <ion-list *ngSwitchCase="'bestof'">
             <h2>Menus Best of :</h2>
+            <p>10€ Pizza + Boisson + dessert</p>
             <span *ngFor="let p of products">
                 <ion-item  *ngIf="p.menu.name == 'Menu Bestof'">
                     <p>{{p.name}}</p>
+                    <p>{{p.price}} €</p>
                   </ion-item>
             </span>
         </ion-list>
         <ion-list *ngSwitchCase="'maxibestof'">
             <h2>Menus Maxi Best of :</h2>
+            <p>12€ Pizza + Boisson + dessert</p>
             <span *ngFor="let p of products">
                 <ion-item  *ngIf="p.menu.name == 'Menu Maxi BestOf'">
                     <p>{{p.name}}</p>
+                    <p>{{p.price}} €</p>
                   </ion-item>
             </span>
   

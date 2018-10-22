@@ -1,0 +1,33 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar  color="twitter">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <img src="assets/imgs/pizza.png" class="logo" alt="">
+    <ion-title>Login</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="openBasicModal()">
+          <ion-icon name="basket"></ion-icon>
+          <ion-badge id="cart-badge" class="{{this.backendProvider.showBadge? 'visibleBadge' : 'hiddenBadge' }}">{{this.backendProvider.quantity}}</ion-badge>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-input placeholder="login"></ion-input>
+  <ion-input placeholder="password"></ion-input>
+  <button ion-button icon-only (click)="goToProducts()">
+      <ion-icon name="Connect">Connect</ion-icon>
+    </button>
+
+</ion-content>

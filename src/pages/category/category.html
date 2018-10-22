@@ -1,59 +1,85 @@
-
-<!-- <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Categories</ion-title>
-    </ion-navbar>
-    <ion-toolbar no-border-top>
-      <ion-segment [(ngModel)]="categorie" color="primary">
-        <ion-segment-button *ngFor="let c of categories;let i = index" value="{{i}}" >
-          {{c.name}}
-        </ion-segment-button>
-      </ion-segment>
-    </ion-toolbar>
-  </ion-header>
-  
-  
-  <ion-content padding>
-    <ion-list [virtualScroll]="panelData" [headerFn]="panelHeaders">
-      <ion-item-divider *virtualHeader="let header">
-        <span style="font-weight: bolder">{{ header }}</span>
-      </ion-item-divider>
-      <ion-item *virtualItem="let products">
-        <button ion-item item-start (click)="itemTapped({id:products.id})">
-          <h2>{{p.name}}</h2>
-          <div>{{p.id}}</div>
-        </button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-   -->
-
-   <!--
-  Generated template for the ProductPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="twitter">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Product</ion-title>
+
+    <ion-title>Categories</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openSearch()" >
+        <ion-icon name="search" ></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openBasicModal()">
+        <ion-icon name="basket"></ion-icon>
+        <ion-badge id="cart-badge" class="{{this.backendProvider.showBadge? 'visibleBadge' : 'hiddenBadge' }}">{{this.backendProvider.quantity}}</ion-badge>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="categorie" color="primary">
+      <ion-segment-button *ngFor="let c of categories" value="{{c.id}}" (ionSelect)="onChange($event)">
+        {{c.name}}
+      </ion-segment-button>
+
+    </ion-segment>
+
+  </ion-toolbar>
+  <ion-toolbar class="{{showSearch? 'visibleBadge' : 'hiddenBadge' }}">
+    <ion-segment>
+      <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngFor="let p of products  | search : terms">
+    <ion-card>
+      <img src="{{p.image}}" class="ProductCard" />
+      <ion-card-content>
+        <ion-card-title>
+          {{p.name}}
+        </ion-card-title>
+        <p>
+          {{p.price | currency }}
+        </p>
+      </ion-card-content>
+      <div text-center>
+        <button ion-button icon-only text-left (click)="openModalViewProduct(p)">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <button ion-button icon-only value="{{p.id}}" (click)="openModalQuantity(p)">
+          <ion-icon name="basket"></ion-icon>
+        </button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+
+<!-- working -->
+<!-- <ion-header>
+  <ion-navbar color="twitter">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img src="assets/imgs/pizza.png" class="logo" alt="">
+    <ion-title>Category</ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top>
       <ion-segment [(ngModel)]="categorie">
         <ion-segment-button value="Pizza">
-          Pizza
+          Pizzas
         </ion-segment-button>
         <ion-segment-button value="Boisson">
-          Boisson
+          Boissons
         </ion-segment-button>
         <ion-segment-button value="Dessert">
-            Dessert
+            Desserts
           </ion-segment-button>
       </ion-segment>
   </ion-toolbar>
@@ -61,8 +87,9 @@
 
 
 <ion-content padding>
-  <div [ngSwitch]="categorie">
-      <!-- <ion-list *ngSwitchCase="'Pizza'">
+  <div [ngSwitch]="categorie"> -->
+
+<!-- <ion-list *ngSwitchCase="'Pizza'">
           <ion-item *ngFor="let item of products | filterByCategorie:{categorie.name: products[0], include: true}]">
               {{item.name}}
           </ion-item>
@@ -72,30 +99,58 @@
           {{p.name}}
       </ion-item>
     </ion-list> -->
-     <ion-list *ngSwitchCase="'Pizza'">
+
+<!-- <ion-list *ngSwitchCase="'Pizza'">
         <h2>Pizzas :</h2>
         <span *ngFor="let p of products">
-            <ion-item  *ngIf="p.categorie.name == 'Pizzas'">
-                <p>{{p.name}}</p>
+            <ion-item  *ngIf="p.categorie.name == 'Pizzas'" text-center>
+                <img src="{{p.image}}" alt="" class="logoProduct" >
+                <h2>{{p.name}}</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, culpa optio.</p>
+                <p>{{p.price}} €</p> 
+                <button ion-button icon-only text-left>
+                    <ion-icon name="eye"></ion-icon>
+                </button>
+                <button ion-button icon-only>
+                    <ion-icon name="basket" ></ion-icon>
+                </button>
               </ion-item>
         </span>
       </ion-list>
       <ion-list *ngSwitchCase="'Boisson'">
           <h2>Boissons :</h2>
-          <span *ngFor="let p of products">
-              <ion-item  *ngIf="p.categorie.name == 'Boissons'">
-                  <p>{{p.name}}</p>
+          <div *ngFor="let p of products">
+              <ion-item  *ngIf="p.categorie.name == 'Boissons'" text-center>
+                  <img src="{{p.image}}" alt="" class="logoProduct" >
+                  <h2>{{p.name}}</h2>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, culpa optio.</p>
+                  <p>{{p.price}} €</p> 
+                  <button ion-button icon-only text-left>
+                      <ion-icon name="eye" onclick=""></ion-icon>
+                  </button>
+                  <button ion-button icon-only>
+                      <ion-icon name="basket" ></ion-icon>
+                  </button>
                 </ion-item>
-          </span>
+            </div>
       </ion-list>
       <ion-list *ngSwitchCase="'Dessert'">
           <h2>Desserts :</h2>
-          <span *ngFor="let p of products">
-              <ion-item  *ngIf="p.categorie.name == 'Desserts'">
-                  <p>{{p.name}}</p>
+          <div *ngFor="let p of products"  >
+              <ion-item  *ngIf="p.categorie.name == 'Desserts'" text-center>
+                  <img src="{{p.image}}" alt="" class="logoProduct" >
+                  <h2>{{p.name}}</h2>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, culpa optio.</p>
+                  <p>{{p.price}} €</p> 
+                  <button ion-button icon-only text-left>
+                      <ion-icon name="eye"></ion-icon>
+                  </button>
+                  <button ion-button icon-only>
+                      <ion-icon name="basket" ></ion-icon>
+                  </button>
                 </ion-item>
-          </span>
+              </div>
 
       </ion-list>
   </div>
-</ion-content>
+</ion-content>  -->

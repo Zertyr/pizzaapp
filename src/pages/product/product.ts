@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { BackendProvider } from '../../providers/backend/backend';
+import { CategoryPage } from '../category/category';
+import { BasketPage } from '../../pages/basket/basket';
 /**
  * Generated class for the ProductPage page.
  *
@@ -13,18 +15,18 @@ import { BackendProvider } from '../../providers/backend/backend';
   templateUrl: 'product.html',
 })
 
-export class ProductPage {
+export class ProductPage {  
   
   firstname: string
   lastname: string
   products: [any]
   menus: [any]
   categories: [any]
-
+  
   pet: string = "puppies";
   // isAndroid: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider, platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider, platform: Platform,  public modalCtrl: ModalController) {
     this.firstname = this.navParams.get('firstname')
     this.lastname = this.navParams.get('lastname')
     this.products = this.navParams.get('products')
@@ -44,6 +46,10 @@ export class ProductPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductPage');
     this.showProducts();
+    
   }
-
+  openBasicModal() {
+    let myModal = this.modalCtrl.create(BasketPage);
+    myModal.present();
+  }
 }

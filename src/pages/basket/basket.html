@@ -1,0 +1,47 @@
+<!--
+  Generated template for the BasketPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="twitter">
+      <ion-buttons end>
+          <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Basket</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor="let p of basket">
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          {{p.name}}
+        </ion-card-title>
+        <p>
+          {{p.price | currency }} | Quantité : {{p.quantity}}
+        </p>
+        <p>
+          Total pour {{p.quantity}} {{p.name}} : {{(p.price * p.quantity) | currency}}
+        </p>
+      </ion-card-content>
+      <div text-center>
+        <button ion-button icon-only value="{{p.id}}" (click)="goTrash(p)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button ion-button icon-only text-left (click)="removeQuantity(p)" >
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        <button ion-button icon-only value="{{p.id}}" (click)="addQuantity(p)">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+    </ion-card>
+  </div>
+  <h4>Prix total : {{total | currency}} €</h4>
+</ion-content>
