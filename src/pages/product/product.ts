@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { BackendProvider } from '../../providers/backend/backend';
-import { CategoryPage } from '../category/category';
 import { BasketPage } from '../../pages/basket/basket';
 /**
  * Generated class for the ProductPage page.

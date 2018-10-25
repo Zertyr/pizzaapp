@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Platform, AlertController, ModalController, Events } from 'ionic-angular';
 import { ViewProductPage } from '../view-product/view-product'
 import { BackendProvider } from '../../providers/backend/backend';
-import { FilterByCategoryPipe } from '../../pipes/filter-by-category/filter-by-category';
+
 import { BasketPage } from '../../pages/basket/basket';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
@@ -31,8 +31,11 @@ export class CategoryPage {
   showSearch: boolean = false
   quantity = this.backendProvider.quantity
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider, platform: Platform, public alertCtrl: AlertController, public modalCtrl: ModalController) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider, platform: Platform, public alertCtrl: AlertController, public modalCtrl: ModalController,public events: Events) {
+    events.subscribe('product:add', data => {
+      // user and time are the same arguments passed in `events.publish(user, time)`
+      this.backendProvider.presentToast(data);
+    });
   }
 
   showCategories(){

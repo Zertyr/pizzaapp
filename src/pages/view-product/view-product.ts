@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
-import { CategoryPage } from '../category/category'
 import { BackendProvider } from '../../providers/backend/backend';
 import { Product } from '../../models/product';
 

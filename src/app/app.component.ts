@@ -2,16 +2,17 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav,Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { NavController, AlertController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+//Native Components
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { HomePage } from '../pages/home/home';
 import { ProductPage } from '../pages/product/product';
 import { CategoryPage } from '../pages/category/category';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
-import { ViewProductPage } from '../pages/view-product/view-product';
+import { WelcomePage } from '../pages/welcome/welcome';
 
-import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -19,9 +20,18 @@ import { NgIf } from '@angular/common';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = HomePage;
+
+  rootPage:any=HomePage;
   pages: Array<{title: string, component: any}>;
-  constructor( public alertCtrl: AlertController, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+
+  constructor( public alertCtrl: AlertController, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private nativeStorage: NativeStorage) {
+    console.log('nativeStorage : ' + this.nativeStorage.getItem('tutorial'));
+    
+    platform.ready().then(() => {
+      statusBar.styleDefault();
+      this.getTuto();
+      splashScreen.hide();
+  });
 
     this.pages = [
       { title: 'Home', component: HomePage },
@@ -42,8 +52,6 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-  
-
     if(page.title != 'Product'){
       this.nav.setRoot(page.component);
     }else{
@@ -84,4 +92,16 @@ export class MyApp {
     }
   }
   
+
+
+  public getTuto():void {
+    this.nativeStorage.getItem('tutorial').then(hasSeenTutorial => {
+      console.log(hasSeenTutorial)
+      if(hasSeenTutorial){
+         this.rootPage = HomePage;
+       }else {
+        this.rootPage = WelcomePage;
+      }
+    }, error => console.error(error));
+  }
 }

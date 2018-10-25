@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -16,6 +17,7 @@ import { HttpModule } from '@angular/http';
 import { BasketPage } from '../pages/basket/basket';
 import { ViewProductPage } from '../pages/view-product/view-product';
 import { QuantityPage } from '../pages/quantity/quantity';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { QuantityPage } from '../pages/quantity/quantity';
     LoginPage,
     BasketPage,
     ViewProductPage,
-    QuantityPage
+    QuantityPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -45,13 +48,15 @@ import { QuantityPage } from '../pages/quantity/quantity';
     LoginPage,
     BasketPage,
     ViewProductPage,
-    QuantityPage
+    QuantityPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BackendProvider
+    BackendProvider,
+    NativeStorage
   ]
 })
 export class AppModule {}

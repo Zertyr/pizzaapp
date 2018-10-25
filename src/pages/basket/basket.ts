@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
-import { CategoryPage } from '../category/category'
+import { NavController, NavParams, Platform, ViewController, Events} from 'ionic-angular';
+
 import { BackendProvider } from '../../providers/backend/backend';
 
 /**
@@ -19,7 +19,7 @@ export class BasketPage {
   total: any;
   
   basket : any[] = this.backendProvider.getBasket();
-  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider,  public viewCtrl: ViewController, platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public backendProvider: BackendProvider,  public viewCtrl: ViewController, platform: Platform, public events: Events) {
 
   }
 
@@ -38,6 +38,7 @@ export class BasketPage {
     this.total = this.total +  product.price;
     this.backendProvider.quantity += 1;
     console.log(this.total);
+    this.events.publish('product:add', product.name + " ajouté au panier !");
   }
   removeQuantity(product){
     if(product.quantity != 1){
@@ -55,4 +56,5 @@ export class BasketPage {
   dismiss() {
     this.viewCtrl.dismiss();
 }
+
 }
