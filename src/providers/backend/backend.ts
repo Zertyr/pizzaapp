@@ -25,7 +25,7 @@ export class BackendProvider {
     // apiURL = '/api'
 
     if(this.prod){
-      this.apiURL = "http://fast-badlands-48562.herokuapp.com/api/1.0"
+      this.apiURL = "https://cors-anywhere.herokuapp.com/http://fast-badlands-48562.herokuapp.com/api/1.0"
     }else{
       this.apiURL = '/api'
     }

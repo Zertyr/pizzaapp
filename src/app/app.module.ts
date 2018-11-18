@@ -4,7 +4,17 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { NativeStorage } from '@ionic-native/native-storage';
-
+import { Geolocation } from '@ionic-native/geolocation';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  GoogleMapOptions,
+  CameraPosition,
+  MarkerOptions,
+  Marker,
+  Environment
+} from '@ionic-native/google-maps';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProductPage } from '../pages/product/product';
@@ -18,6 +28,7 @@ import { BasketPage } from '../pages/basket/basket';
 import { ViewProductPage } from '../pages/view-product/view-product';
 import { QuantityPage } from '../pages/quantity/quantity';
 import { WelcomePage } from '../pages/welcome/welcome';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +67,8 @@ import { WelcomePage } from '../pages/welcome/welcome';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackendProvider,
-    NativeStorage
+    NativeStorage,
+    Geolocation
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform } from 'ionic-angular';
+import { Nav,Platform, Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AlertController } from 'ionic-angular';
@@ -12,8 +12,8 @@ import { CategoryPage } from '../pages/category/category';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
-
-
+import { Geolocation } from '@ionic-native/geolocation';
+import { BackendProvider } from "../providers/backend/backend"
 
 @Component({
   templateUrl: 'app.html'
@@ -24,13 +24,30 @@ export class MyApp {
   rootPage:any=HomePage;
   pages: Array<{title: string, component: any}>;
 
-  constructor( public alertCtrl: AlertController, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private nativeStorage: NativeStorage) {
+  constructor( public alertCtrl: AlertController, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private nativeStorage: NativeStorage, private geolocation: Geolocation, public events: Events , public backendProvider: BackendProvider) {
     console.log('nativeStorage : ' + this.nativeStorage.getItem('tutorial'));
     
     platform.ready().then(() => {
       statusBar.styleDefault();
       this.getTuto();
+
+            // get current position
+            geolocation.getCurrentPosition().then(pos => {
+              console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+            });
+      
+            const watch = geolocation.watchPosition().subscribe(pos => {
+              console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+            });
+      
+            // to stop watching
+            watch.unsubscribe();
+            events.subscribe('geo:show', data => {
+              // user and time are the same arguments passed in `events.publish(user, time)`
+              this.backendProvider.presentToast(data);
+            });
       splashScreen.hide();
+      
   });
 
     this.pages = [
@@ -40,13 +57,6 @@ export class MyApp {
       { title: 'Category', component: CategoryPage },
       { title: 'Menu', component: MenuPage }
     ];
-    
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
   }
 
   openPage(page) {
